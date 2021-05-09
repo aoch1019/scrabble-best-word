@@ -72,6 +72,10 @@ public class BestWord implements IBestWord {
     
     public int getHighestScore() {
         return highestScore;
+    }   
+    
+    public void setHand(Tile[] hand) {
+        this.hand = hand;
     }    
 
     /**
@@ -977,26 +981,34 @@ public class BestWord implements IBestWord {
     public static void main(String[] args) {
         Board b = new Board();
 //        b.createRandomBoard();
-        Tile t1 = new Tile('E');
-        Tile t2 = new Tile('N');
-        Tile t3 = new Tile('T');
-        Tile t4 = new Tile('E');
-        Tile t5 = new Tile('R');
-        Tile t6 = new Tile('O');
-        Tile t7 = new Tile('N');
-        Tile t8 = new Tile('X');
-        Tile t9 = new Tile('P');
-        Tile t10 = new Tile('O');
+//        Tile t1 = new Tile('E');
+//        Tile t2 = new Tile('N');
+//        Tile t3 = new Tile('T');
+//        Tile t4 = new Tile('E');
+//        Tile t5 = new Tile('R');
+//        Tile t6 = new Tile('O');
+//        Tile t7 = new Tile('N');
+//        Tile t8 = new Tile('X');
+//        Tile t9 = new Tile('P');
+//        Tile t10 = new Tile('O');
+//        b.placeTile(t1, 7, 7);
+//        b.placeTile(t2, 7, 8);
+//        b.placeTile(t3, 7, 9);
+//        b.placeTile(t4, 7, 10);
+//        b.placeTile(t5, 7, 11);
+//        b.placeTile(t6, 7, 12);
+//        b.placeTile(t7, 7, 13);
+//        b.placeTile(t8, 8, 7);
+//        b.placeTile(t9, 9, 7);
+//        b.placeTile(t10, 10, 7);
+        Tile t1 = new Tile('W');
+        Tile t2 = new Tile('O');
+        Tile t3 = new Tile('R');
+        Tile t4 = new Tile('D');
         b.placeTile(t1, 7, 7);
         b.placeTile(t2, 7, 8);
         b.placeTile(t3, 7, 9);
         b.placeTile(t4, 7, 10);
-        b.placeTile(t5, 7, 11);
-        b.placeTile(t6, 7, 12);
-        b.placeTile(t7, 7, 13);
-        b.placeTile(t8, 8, 7);
-        b.placeTile(t9, 9, 7);
-        b.placeTile(t10, 10, 7);          
         BestWord bw = new BestWord(b);
         b.printBoard();
         bw.printIntBoard();
