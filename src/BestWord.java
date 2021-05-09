@@ -595,6 +595,7 @@ public class BestWord implements IBestWord {
      */
     public int calculateScore(HashMap<Entry<Integer, Integer>, Character> move) {
         int score = 0;
+        int mainRowOrColumn = -1;
         int rowA = -1;
         int rowB;
         int colA = -1;
@@ -611,12 +612,14 @@ public class BestWord implements IBestWord {
                 rowB = e.getKey() + 1;
                 colA = e.getValue();
                 colB = e.getValue();
+                mainRowOrColumn = e.getKey();
                 vert = false;
             } else {
                 rowA = e.getKey();
                 rowB = e.getKey();
                 colA = e.getValue() - 1;
                 colB = e.getValue() + 1;
+                mainRowOrColumn = e.getValue();
                 vert = true;
             }
             // once orientation established, go through word
@@ -705,51 +708,51 @@ public class BestWord implements IBestWord {
         //First check within the known range
         for(int i = min + 1; i < max; i++) {
             if(vert) {
-                if(intBoard[i][colA] == 1) {
-                    newTempScore += board.getTile(i, colA).getPoints();
+                if(intBoard[i][mainRowOrColumn] == 1) {
+                    newTempScore += board.getTile(i, mainRowOrColumn).getPoints();
                 }                
             }
             else {
-                if(intBoard[rowA][i] == 1) {
-                    newTempScore += board.getTile(rowA, i).getPoints();
+                if(intBoard[mainRowOrColumn][i] == 1) {
+                    newTempScore += board.getTile(mainRowOrColumn, i).getPoints();
                 }
             }
         }
         //Now check to the left/above
         for(int i = min - 1; i >= 0; i--) {
             if(vert) {
-                if(intBoard[i][colA] == 0) {
+                if(intBoard[i][mainRowOrColumn] == 0) {
                     break;
                 }
                 else {
-                    newTempScore += board.getTile(i, colA).getPoints();
+                    newTempScore += board.getTile(i, mainRowOrColumn).getPoints();
                 }                
             }
             else {
-                if(intBoard[rowA][i] == 0) {
+                if(intBoard[mainRowOrColumn][i] == 0) {
                     break;
                 }
                 else {
-                    newTempScore += board.getTile(rowA, i).getPoints();
+                    newTempScore += board.getTile(mainRowOrColumn, i).getPoints();
                 }
             }
         }
         //Now check to the right/below
         for(int i = max + 1; i <= 14; i++) {
             if(vert) {
-                if(intBoard[i][colA] == 0) {
+                if(intBoard[i][mainRowOrColumn] == 0) {
                     break;
                 }
                 else {
-                    newTempScore += board.getTile(i, colA).getPoints();
+                    newTempScore += board.getTile(i, mainRowOrColumn).getPoints();
                 }                
             }
             else {
-                if(intBoard[rowA][i] == 0) {
+                if(intBoard[mainRowOrColumn][i] == 0) {
                     break;
                 }
                 else {
-                    newTempScore += board.getTile(rowA, i).getPoints();
+                    newTempScore += board.getTile(mainRowOrColumn, i).getPoints();
                 }
             }
         }
@@ -768,6 +771,7 @@ public class BestWord implements IBestWord {
     
     public int calculateScore2(HashMap<Entry<Integer, Integer>, Character> move) {
         int score = 0;
+        int mainRowOrColumn = -1;
         int rowA = -1;
         int rowB;
         int colA = -1;
@@ -784,12 +788,14 @@ public class BestWord implements IBestWord {
                 rowB = e.getKey() + 1;
                 colA = e.getValue();
                 colB = e.getValue();
+                mainRowOrColumn = e.getKey();
                 vert = false;
             } else {
                 rowA = e.getKey();
                 rowB = e.getKey();
                 colA = e.getValue() - 1;
                 colB = e.getValue() + 1;
+                mainRowOrColumn = e.getValue();
             }
             // once orientation established, go through word
             // from tile to beginning, then tile to end
@@ -864,6 +870,7 @@ public class BestWord implements IBestWord {
             Tile t1 = new Tile(c);
             int value = t1.getPoints();
             newTempScore += value;
+            System.out.println("After looking at " + c + " score is " + newTempScore);
             Square s1 = board.getSquare(e1.getKey(), e1.getValue());
             int newMultCode = s1.getMultiplier();
             if (newMultCode == 1) {
@@ -876,55 +883,57 @@ public class BestWord implements IBestWord {
                 XWordScores.add(3);
             }
         }
+        System.out.println("1. newTempScore is " + newTempScore);
         //Check for existing letters on the board to add
         //First check within the known range
+        System.out.println("mainRowOrColumn is " + mainRowOrColumn);
         for(int i = min + 1; i < max; i++) {
             if(vert) {
-                if(intBoard[i][colA] == 1) {
-                    newTempScore += board.getTile(i, colA).getPoints();
+                if(intBoard[i][mainRowOrColumn] == 1) {
+                    newTempScore += board.getTile(i, mainRowOrColumn).getPoints();
                 }                
             }
             else {
-                if(intBoard[rowA][i] == 1) {
-                    newTempScore += board.getTile(rowA, i).getPoints();
+                if(intBoard[mainRowOrColumn][i] == 1) {
+                    newTempScore += board.getTile(mainRowOrColumn, i).getPoints();
                 }
             }
         }
         //Now check to the left/above
         for(int i = min - 1; i >= 0; i--) {
             if(vert) {
-                if(intBoard[i][colA] == 0) {
+                if(intBoard[i][mainRowOrColumn] == 0) {
                     break;
                 }
                 else {
-                    newTempScore += board.getTile(i, colA).getPoints();
+                    newTempScore += board.getTile(i, mainRowOrColumn).getPoints();
                 }                
             }
             else {
-                if(intBoard[rowA][i] == 0) {
+                if(intBoard[mainRowOrColumn][i] == 0) {
                     break;
                 }
                 else {
-                    newTempScore += board.getTile(rowA, i).getPoints();
+                    newTempScore += board.getTile(mainRowOrColumn, i).getPoints();
                 }
             }
         }
         //Now check to the right/below
         for(int i = max + 1; i <= 14; i++) {
             if(vert) {
-                if(intBoard[i][colA] == 0) {
+                if(intBoard[i][mainRowOrColumn] == 0) {
                     break;
                 }
                 else {
-                    newTempScore += board.getTile(i, colA).getPoints();
+                    newTempScore += board.getTile(i, mainRowOrColumn).getPoints();
                 }                
             }
             else {
-                if(intBoard[rowA][i] == 0) {
+                if(intBoard[mainRowOrColumn][i] == 0) {
                     break;
                 }
                 else {
-                    newTempScore += board.getTile(rowA, i).getPoints();
+                    newTempScore += board.getTile(mainRowOrColumn, i).getPoints();
                 }
             }
         }
