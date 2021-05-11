@@ -70,6 +70,7 @@ public class Board implements IBoard {
     }    
 
 	public void printBoard() {
+        System.out.println("--------------------------------------------------------------------------");
 		for(Square[] sqArr : board) {
 			for(Square sq : sqArr) {
 				System.out.print(sq.getSquareString() + " | ");
@@ -106,7 +107,6 @@ public class Board implements IBoard {
                 randIndex = (int)Math.floor((Math.random() * size));
                 word = words.get(randIndex);
             }
-            System.out.println("Got the word " + word);
             //place the word in the starting spot
             for(int i = 0; i < word.length(); i++) {
                 Tile curr = this.bag.getTileByLetter(word.charAt(i));
@@ -133,7 +133,6 @@ public class Board implements IBoard {
                 word2 = sameLetterList.get(randIndex2);
                 modifiedWord2 = word2.substring(1);
             }
-            System.out.println("Got the second word: " + word2);
             for(int i = 1; i < word2.length(); i++) {
                 Tile curr = this.bag.getTileByLetter(word2.charAt(i));
                 this.bag.removeTile(curr);

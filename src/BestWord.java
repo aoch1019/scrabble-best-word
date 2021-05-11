@@ -23,10 +23,18 @@ public class BestWord implements IBestWord {
         hand = new Tile[7];
         for(int i = 0; i < hand.length; i++) {
             hand[i] = board.getBag().getRandomTile();
-            System.out.println(hand[i].getLetter());
         }
         highestScore = 0;
     }
+    
+    public void printTiles() {
+        System.out.println("-----------------------------");
+        System.out.print("| ");
+        for(Tile t : hand) {
+            System.out.print(t.getLetter() + " | ");
+        }
+        System.out.println("\n-----------------------------");
+    }    
 
     /**
      * Creates an integer representation of the board. 1 means there is a tile, 0
@@ -288,11 +296,11 @@ public class BestWord implements IBestWord {
         for (Entry<Integer, Entry<Integer, Integer>> entry : verticalPlays) {
             legalMoves.addAll(validWordsForVerticalPlacement(entry));
         }
-        System.out.println("numMoves: " + legalMoves.size());
+        System.out.println("Number of vertical moves: " + legalMoves.size());
         for (Entry<Integer, Entry<Integer, Integer>> entry : horizontalPlays) {
             legalMoves.addAll(validWordsForHorizontalPlacement(entry));
         }
-        System.out.println("numMoves: " + legalMoves.size());
+        System.out.println("Number of horizontal moves: " + legalMoves.size());
         return legalMoves;
     }
 
@@ -971,58 +979,13 @@ public class BestWord implements IBestWord {
 
     public static void main(String[] args) {
         Board b = new Board();
+        System.out.println("\nGenerating a random Scrabble board...");
         b.createRandomBoard();
-//        Tile t1 = new Tile('E');
-//        Tile t2 = new Tile('N');
-//        Tile t3 = new Tile('T');
-//        Tile t4 = new Tile('E');
-//        Tile t5 = new Tile('R');
-//        Tile t6 = new Tile('O');
-//        Tile t7 = new Tile('N');
-//        Tile t8 = new Tile('X');
-//        Tile t9 = new Tile('P');
-//        Tile t10 = new Tile('O');
-//        b.placeTile(t1, 7, 7);
-//        b.placeTile(t2, 7, 8);
-//        b.placeTile(t3, 7, 9);
-//        b.placeTile(t4, 7, 10);
-//        b.placeTile(t5, 7, 11);
-//        b.placeTile(t6, 7, 12);
-//        b.placeTile(t7, 7, 13);
-//        b.placeTile(t8, 8, 7);
-//        b.placeTile(t9, 9, 7);
-//        b.placeTile(t10, 10, 7);
-//        Tile t1 = new Tile('S');
-//        Tile t2 = new Tile('T');
-//        Tile t3 = new Tile('A');
-//        Tile t4 = new Tile('P');
-//        Tile t5 = new Tile('L');
-//        Tile t6 = new Tile('E');
-//        Tile t7 = new Tile('R');
-//        Tile[] newHand = new Tile[7];
-//        newHand[0] = t1;
-//        newHand[1] = t2;
-//        newHand[2] = t3;
-//        newHand[3] = t4;
-//        newHand[4] = t5;
-//        newHand[5] = t6;
-//        newHand[6] = t7; 
-//        Tile a = new Tile('T');
-//        Tile c = new Tile('E');
-//        Tile d = new Tile('S');
-//        Tile f = new Tile('T');
-//        Tile a = new Tile('W');
-//        Tile c = new Tile('O');
-//        Tile d = new Tile('R');
-//        Tile f = new Tile('D');
-//        b.placeTile(a, 7, 7);
-//        b.placeTile(c, 7, 8);
-//        b.placeTile(d, 7, 9);
-//        b.placeTile(f, 7, 10);
         BestWord bw = new BestWord(b);
-//        bw.setHand(newHand);
         b.printBoard();
-        bw.printIntBoard();
+        System.out.println("\nHere are your tiles...");
+        bw.printTiles();
+        System.out.println();
         ArrayList<Entry<Integer, Integer>> validAnchors = bw.getValidAnchors();
 //        System.out.println("Here are all valid anchors:");
 //        for(Entry<Integer, Integer> curr : validAnchors) {
@@ -1035,7 +998,7 @@ public class BestWord implements IBestWord {
             Tile t = new Tile(bestMove.get(e));
             b.placeTile(t, row, col);
         }
-        System.out.println(bw.getHighestScore());
+        System.out.println("\nThe Highest scoring word is worth " + bw.getHighestScore() + " points");
         b.printBoard();
 //        bw.calculateScore2(bestMove);
     }
