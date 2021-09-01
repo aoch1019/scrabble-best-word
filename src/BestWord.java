@@ -591,7 +591,7 @@ public class BestWord implements IBestWord {
      * @param move - a specific legal move
      * @return the score of the move
      */
-    public int calculateScore(HashMap<Entry<Integer, Integer>, Character> move) {
+    private int calculateScore(HashMap<Entry<Integer, Integer>, Character> move) {
         int score = 0;
         int mainRowOrColumn = -1;
         int rowA;
@@ -961,7 +961,7 @@ public class BestWord implements IBestWord {
      * @param move - a specific legal move
      * @return true if meant to be played vertically, false if not
      */
-    public boolean verticalPlacement(HashMap<Entry<Integer, Integer>, Character> move) {
+    private boolean verticalPlacement(HashMap<Entry<Integer, Integer>, Character> move) {
         ArrayList<Integer> temp = new ArrayList<Integer>();
         for (Entry<Integer, Integer> e : move.keySet()) {
             int y = e.getValue();
